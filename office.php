@@ -22,17 +22,30 @@
 
 <?php
 
-  require('config/config.php');
-  require('config/db.php');
+require ('config/config.php');
+require ('config/db.php');
 
-  $query = 'SELECT * FROM office ORDER BY name';
-  $result = mysqli_query($conn, $query); 
-  $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  mysqli_free_result($result);
-  mysqli_close($conn);
+$results_per_page = 10;
+$query = "SELECT * FROM office";
+$result = mysqli_query($conn, $query);
+$number_of_result = mysqli_num_rows($result);
+$number_of_page = ceil($number_of_result / $results_per_page);
+
+
+if(!isset($_GET['page'])){
+    $page = 1;
+}else{
+    $page = $_GET['page'];
+}
+
+$page_first_result = ($page-1) * $results_per_page;
+$query = 'SELECT * FROM office ORDER BY name LIMIT '. $page_first_result .',' . $results_per_page . '';
+$result = mysqli_query($conn, $query);
+$offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
+mysqli_close($conn);
 
 ?>
-
 
 
 
@@ -59,32 +72,42 @@
                     <div class = "row">
                     <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Office</h4>
-                                    <p class="card-category">Here is a subtitle for this table</p>
+                            <br/>
+                            <div class="col-md-12">
+                                <a href="office-add.php">
+                                    <button type="submit" class="btn btn-info btn-fill pull-right">Add New Office</button>
+                                </a>
+                            </div>
+                            <div class="card-header ">
+                                    <h4 class="card-title">OFFICES</h4>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">
-                                        <thead>
-                                            <th>Name</th>
-                                            <th>Contact Number</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>City</th>
-                                            <th>Country</th>
-                                            <th>Postal</th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach ($offices as $office) : ?> 
-                                            <tr>
-                                                <td><?php echo $office['name']; ?> </td>
-                                                <td><?php echo $office['contactnum']; ?> </td>
-                                                <td><?php echo $office['email']; ?> </td>
-                                                <td><?php echo $office['address']; ?> </td>
-                                                <td><?php echo $office['city']; ?> </td>
-                                                <td><?php echo $office['country']; ?> </td>
-                                                <td><?php echo $office['postal']; ?> </td>
-                                            </tr>
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>Country</th>
+                                        <th>Postal</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($offices as $office) : ?>
+                                        <tr>
+                                            <td><?php echo $office['name']; ?></td>
+                                            <td><?php echo $office['contactnum']; ?></td>
+                                            <td><?php echo $office['email']; ?></td>
+                                            <td><?php echo $office['address']; ?></td>
+                                            <td><?php echo $office['city']; ?></td>
+                                            <td><?php echo $office['country']; ?></td>
+                                            <td><?php echo $office['postal']; ?></td>
+                                            <td>
+                                            <a href="office-edit.php?id=<?php echo $office['id']; ?>">
+                                            <button type="submit" class ="btn btn-warning btn-fill pull-right">Edit</button>
+                                        </a>
+                                        </td>
+                                        </tr>
                                             <?php endforeach ?>
 
                                         </tbody>
@@ -92,13 +115,12 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
-
-
+                    <?php
+                for($page=1; $page <= $number_of_page; $page++){
+                    echo '<a href = "office.php?page='. $page .'">  ' . $page . '</a>';
+                }
+            ?>  
                 </div>
             </div>
             <footer class="footer">

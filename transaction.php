@@ -21,23 +21,41 @@
 <body>
 
 <?php
+        error_reporting(0);
+        require('config/config.php');
+        require('config/db.php');
 
-  require('config/config.php');
-  require('config/db.php');
-
-  $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action,transaction.remarks, office.name as office_name, CONCAT(employee.lastname, ",", employee.firstname) as employee_fullname FROM record_app.employee, record_app.office, transaction 
-  WHERE transaction.employee_id = employee.id and transaction.office_id = office.id';
-  
-  $result = mysqli_query($conn, $query); 
-  $transactions = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  mysqli_free_result($result);
-  mysqli_close($conn);
-
-?>
+        $search = $_GET['search'];
+        $results_per_page = 10;
+        $query = "SELECT * FROM transaction";
+        $result = mysqli_query($conn, $query);
+        $number_of_result = mysqli_num_rows($result);
+        $number_of_page = ceil($number_of_result / $results_per_page);
 
 
+        if(!isset($_GET['page'])){
+            $page = 1;
+        }else{
+            $page = $_GET['page'];
+        }
 
+ 
+        $page_first_result = ($page-1) * $results_per_page;
+     
+        if(strlen($search) > 0){
+            $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action, transaction.remarks, office.name as office_name, CONCAT(employee.lastname, ", ", employee.firstname) as employee_fullname FROM employee, office, transaction 
+                      WHERE transaction.employee_id=employee.id and transaction.office_id=office.id AND transaction.documentcode = ' .$search . '
+                      ORDER BY transaction.documentcode, transaction.datelog LIMIT '. $page_first_result .',' . $results_per_page . '';
+        }else{
+            $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action, transaction.remarks, office.name as office_name, CONCAT(employee.lastname, ", ", employee.firstname) as employee_fullname FROM employee, office, transaction 
+                      WHERE transaction.employee_id=employee.id and transaction.office_id=office.id ORDER BY transaction.documentcode, transaction.datelog LIMIT '. $page_first_result .',' . $results_per_page . '';
+        }
 
+        $result = mysqli_query($conn, $query);
+        $transactions = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_free_result($result);
+        mysqli_close($conn);
+    ?>
 
     <div class="wrapper">
         <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
@@ -61,9 +79,21 @@
                     <div class = "row">
                     <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
+                            <br/>
+                                <div class="col-md-12">
+                                    <form action="transaction.php" method="GET">                                        
+                                        <input type="text" name="search"/>
+                                        <input type="submit" value="Search" class="btn btn-info btn-fill"/>
+                                    </form>
+                                </div>
+                                <div class="col-md-12">
+                                    <a href="transaction-add.php">                                        
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add New Transaction</button>
+                                    </a>
+                                </div>
                                 <div class="card-header ">
-                                    <h4 class="card-title">Transactions</h4>
-                                    <p class="card-category">Here is a subtitle for this table</p>
+                                    <h4 class="card-title">TRANSACTIONS</h4>
+                                    
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <table class="table table-hover table-striped">
@@ -94,13 +124,12 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
+               <?php
+               for($page=1; $page <= $number_of_page; $page++){
+                   echo '<a href = "transaction.php?page='. $page .'">   ' . $page . '</a>';
+               }
+           ?>  
                     </div>
-
-
                 </div>
             </div>
             <footer class="footer">
