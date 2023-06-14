@@ -1,7 +1,7 @@
-
-<?php   require('config/config.php');
-        require('config/db.php'); ?>
-  <head>
+<!DOCTYPE html>
+<html>
+<head> 
+<head>
 
 <meta charset="UTF-8">
 
@@ -131,14 +131,13 @@
 <br><br><br><br>
   <div class="login-card">
     <h1>Log-in</h1><br>
-    <form action="process.php" method="post">
-    <input id="login-username" type="text" class="form-control"  name="username" value="" placeholder="username">
-    <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-    <input type="submit" name="login" class="login login-submit" value="login">
-  </form>
-
-  <div class="login-help">
-    <a href="register.php">Register</a>
+    <form action="register_process.php" method="post">  
+      <input id="register-name" type="text" class="form-control"  name="name" value="" placeholder="Name">
+      <input id="register-username" type="text" class="form-control"  name="username" value="" placeholder="Username">
+      <input id="register-password" type="password" class="form-control" name="password" placeholder="Password">
+      <button type="submit" name="register" class="login login-submit">Register</button>
+    </form>
+  </div>
 </div>
 
 <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
@@ -147,4 +146,5 @@
 
 </body>
 
-</html>
+
+

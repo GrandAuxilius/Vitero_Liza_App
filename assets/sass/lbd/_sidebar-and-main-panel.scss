@@ -220,17 +220,7 @@ body > .navbar-collapse{
         z-index: 2;
     }
 
-    &:before{
-        opacity: .33;
-        background: #000000;
-    }
-
-    &:after{
-       @include icon-gradient($new-purple, $purple-color-bottom);
-       z-index: 3;
-       opacity: 1;
-    }
-
+  
     &[data-image]:after,
     &.has-image:after{
         opacity: .77;
@@ -254,9 +244,8 @@ body > .navbar-collapse{
     &[data-color="red"]:after{
         @include icon-gradient($new-red, $red-color-bottom);
     }
-    &[data-color="purple"]:after{
-        @include icon-gradient($new-purple, $purple-color-bottom);
-    }
+ 
+    
 }
 
 
