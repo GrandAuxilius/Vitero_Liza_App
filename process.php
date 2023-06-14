@@ -12,7 +12,7 @@
  if($row){
  $_SESSION['id'] = $row['id'];
 
- echo '<script>windows: location="billing.php"</script>';
+ echo '<script>windows: location="home.php"</script>';
  }
 	else {
 		header ("location: index.php?err");
