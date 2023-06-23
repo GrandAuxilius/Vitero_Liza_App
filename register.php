@@ -130,7 +130,7 @@
 <body>
 <br><br><br><br>
   <div class="login-card">
-    <h1>Log-in</h1><br>
+    <h1>Register</h1><br>
     <form action="register_process.php" method="post">  
       <input id="register-name" type="text" class="form-control"  name="name" value="" placeholder="Name">
       <input id="register-username" type="text" class="form-control"  name="username" value="" placeholder="Username">

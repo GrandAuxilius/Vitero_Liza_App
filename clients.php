@@ -164,7 +164,7 @@ while($row = mysqli_fetch_array($result))
         </form>  
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
       </div>
     </div>
   </div>
@@ -303,7 +303,7 @@ echo "</table>";
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Edit Owner</h5>
+        <h5 class="modal-title" id="editModalLabel">Edit Client</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -333,7 +333,7 @@ echo "</table>";
           </div>          
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
         <button type="submit" class="btn btn-primary" name="save">Save changes</button>
       </div>
       </form>

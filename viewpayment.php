@@ -46,7 +46,6 @@ if (!$result)
 
 <html>
 <head>
-<title>Smart Utilities</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap/dist/css/bootstrap-theme.css" />
@@ -173,8 +172,7 @@ if (!$result)
                 <td><b><i><?php echo $pres; ?></i></b></td>
             </tr>
             <tr>
-                <th>Consumption:</th>
-                <td><b><i><?php echo $totalcons; ?></i></b></td>
+                
         </table>
     </div>
     <div id="invoice-total">

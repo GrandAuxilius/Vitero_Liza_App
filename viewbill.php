@@ -95,7 +95,6 @@ while($row = mysqli_fetch_array($result))
     <th>ID</th>
     <th>Previous Reading</th>
     <th>Present Reading</th>
-    <th>Consumption</th>
     <th>Price</th>
     <th>Date</th>
     <th>Bill Amount</th>
@@ -117,7 +116,6 @@ while($row = mysqli_fetch_array($result))
         echo "<td align='center'>" . $row['id'] . "</td>";
         echo "<td align='center'>" . $prev . "</td>";
         echo "<td align='center'>" . $pres . "</td>";
-        echo "<td align='center'>" . $totalcons . "</td>";
         echo "<td align='center'>" . $price . "</td>";
         echo "<td align='center'>" . $row['date'] . "</td>";
         echo "<td align='center'>&#8369;" . $bill . "</td>";

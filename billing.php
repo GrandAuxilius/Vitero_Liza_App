@@ -95,7 +95,6 @@ while($row = mysqli_fetch_array($result))
                                 <th>Id</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Mi</th>
                                 <th>Address</th>
                                 <th>Contact</th>
                                 <th>Action</th>    
@@ -114,7 +113,6 @@ while($row = mysqli_fetch_array($result))
                                 echo "<td>" . $row['id'] . "</td>";
                                 echo "<td>" . $row['fname'] . "</td>";
                                 echo "<td>" . $row['lname'] . "</td>";
-                                echo "<td>" . $row['mi'] . "</td>";
                                 echo "<td>" . $row['address'] . "</td>";
                                 echo "<td>" . $row['contact'] . "</td>";
 

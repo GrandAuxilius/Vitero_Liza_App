@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2023 at 06:18 PM
+-- Generation Time: Jun 23, 2023 at 12:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,7 +41,9 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `owners_id`, `prev`, `pres`, `price`, `date`) VALUES
-(63, 16, '12134', '54', '-24160', '23/06/14 17:06:52');
+(63, 16, '12134', '54', '-24160', '23/06/14 17:06:52'),
+(68, 18, '80', '100', '170', '23/06/17 09:57:40'),
+(65, 20, '434', '333333333', '1.1111096633222E+19', '23/06/15 18:47:21');
 
 -- --------------------------------------------------------
 
@@ -63,7 +65,6 @@ CREATE TABLE `owners` (
 --
 
 INSERT INTO `owners` (`id`, `lname`, `fname`, `mi`, `address`, `contact`) VALUES
-(16, 'Vega', 'Tanya', '', 'Brgy. San Pedro', '09735274824'),
 (18, 'Sheen', 'Teena', '', 'Brgy. San Pedro', '09364278433'),
 (17, 'Ortega', 'Janna', '', 'Earth', '094635244792'),
 (11, 'Vitero', 'Randel', '', 'Brgy. San Jose', '09567203821'),
@@ -95,7 +96,9 @@ INSERT INTO `tempo_bill` (`id`, `Prev`, `Client`) VALUES
 (65, '12134', 'Tanya'),
 (66, '12134', 'Tanya'),
 (67, '23443', 'Janna'),
-(68, '3453543', 'Teena');
+(68, '3453543', 'Teena'),
+(69, 'erer', 'erer'),
+(70, '434', '3434');
 
 -- --------------------------------------------------------
 
@@ -115,31 +118,26 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES
-(14, 'randel', 'randel', 'kokko'),
-(19, 'randel', 'randeljj', 'HAKDOG'),
-(27, 'edfwe', 'efefew', 'silewdfef'),
-(28, 'agag', 'agaga', 'gagg');
+(35, 'randel', 'randel', 'randel'),
+(19, '@randel', 'randel', 'randel'),
+(36, '@Liza', 'liza', 'liza');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_levels`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `user_levels` (
-  `id` int(11) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `userlevel` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `user_levels`
---
-
-INSERT INTO `user_levels` (`id`, `username`, `password`, `userlevel`) VALUES
-(1, 'admin', 'admin', '1'),
-(4, 'user4', 'user4', '4');
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -170,10 +168,11 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_levels`
+-- Indexes for table `users`
 --
-ALTER TABLE `user_levels`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -183,31 +182,31 @@ ALTER TABLE `user_levels`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `owners`
 --
 ALTER TABLE `owners`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tempo_bill`
 --
 ALTER TABLE `tempo_bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT for table `user_levels`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `user_levels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
